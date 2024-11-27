@@ -5,6 +5,4 @@ variable "environment" {}
 variable "public_cird_block" {}
 variable "private_cird_block" {}
 variable "azs" {}
-variable elb_listener {}
-variable iam_instance_profile {}
-variable elb_listener_public {}
+
