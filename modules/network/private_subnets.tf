@@ -1,7 +1,7 @@
 resource "aws_subnet" "private-subnets" {
-  count             = length(var.private_cidr_block)
+  count             = length(var.private_cird_block)
   vpc_id            = aws_vpc.default.id
-  cidr_block        = element(var.private_cidr_block, count.index)
+  cidr_block        = element(var.private_cird_block, count.index)
   availability_zone = element(var.azs, count.index)
 
   tags = {

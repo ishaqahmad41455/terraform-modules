@@ -2,6 +2,9 @@ variable "aws_region" {}
 variable "vpc_cidr" {}
 variable "vpc_name" {}
 variable "environment" {}
-variable "public_cidr_block" {}
-variable "private_cidr_block" {}
+variable "public_cird_block" {}
+variable "private_cird_block" {}
 variable "azs" {}
+variable elb_listener {}
+variable iam_instance_profile {}
+variable elb_listener_public {}

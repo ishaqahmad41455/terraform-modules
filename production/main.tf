@@ -11,7 +11,7 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "sreeterraformbucket"
+    bucket = "workspacebucket01"
     key    = "production-modules.tfstate"
     region = "us-east-1"
   }
