@@ -1,4 +1,4 @@
-resource "aws_route_table" "public-route-table" {
+resource "aws_route_table" "public-routing-table" {
   vpc_id = aws_vpc.default.id
 
   route {
@@ -8,44 +8,36 @@ resource "aws_route_table" "public-route-table" {
 
   tags = {
     Name        = "${var.vpc_name}-Public-RT"
-    Owner       = local.Owner
-    costcenter  = local.costcenter
+    DeployedBy  = local.DeployedBy
+    Costcenter  = local.Costcenter
     TeamDL      = local.TeamDL
     environment = "${var.environment}"
-
   }
 }
 
-
-resource "aws_route_table" "private-route-table" {
+resource "aws_route_table" "private-routing-table" {
   vpc_id = aws_vpc.default.id
-
-  route {
+route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.default.id
+    nat_gateway_id = var.natgw_id
   }
-
   tags = {
-    Name        = "${var.vpc_name}-private-RT"
-    Owner       = local.Owner
-    costcenter  = local.costcenter
-    TeamDL      = local.TeamDL
+    Name        = "${var.vpc_name}-Private-RT"
+    # DeployedBy  = local.DeployedBy
+    # Costcenter  = local.Costcenter
+    # TeamDL      = local.TeamDL
     environment = "${var.environment}"
-
   }
 }
 
 resource "aws_route_table_association" "public-subnets" {
-  #   count          = 3
-  count          = length(var.public_cird_block)
-  subnet_id      = element(aws_subnet.public-subnet.*.id, count.index)
-  route_table_id = aws_route_table.public-route-table.id
+  count          = length(var.public_cidr_block)
+  subnet_id      = element(aws_subnet.public-subnets.*.id, count.index)
+  route_table_id = aws_route_table.public-routing-table.id
 }
 
-
 resource "aws_route_table_association" "private-subnets" {
-  #   count          = 3
-  count          = length(var.private_cird_block)
-  subnet_id      = element(aws_subnet.private-subnet.*.id, count.index)
-  route_table_id = aws_route_table.private-route-table.id
+  count          = length(var.private_cidr_block)
+  subnet_id      = element(aws_subnet.private-subnets.*.id, count.index)
+  route_table_id = aws_route_table.private-routing-table.id
 }

@@ -1,5 +1,7 @@
 locals {
-  Owner      = "Prod-Team"
-  costcenter = "Hyd-8080"
-  TeamDL     = "ishaqahmad41455@gmail.com"
+  DeployedBy = "Terraform"
+  Owner      = "ishaq-dev-team"
+  Costcenter = "PAK-8080"
+  TeamDL     = "ahmadishaq@gmail.com"
 }
+

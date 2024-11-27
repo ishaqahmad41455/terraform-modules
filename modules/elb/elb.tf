@@ -1,4 +1,4 @@
-resource "aws_lb" "my-elb" {
+resource "aws_lb" "test" {
   name               = var.nlbname
   internal           = false
   load_balancer_type = "network"
@@ -9,14 +9,14 @@ resource "aws_lb" "my-elb" {
   }
 }
 
-resource "aws_lb_target_group" "tg-for-elb" {
+resource "aws_lb_target_group" "test" {
   name     = var.tgname
   port     = 80
   protocol = "TCP"
   vpc_id   = var.vpc_id
 }
 
-resource "aws_lb_target_group_attachment" "tg-attach" {
+resource "aws_lb_target_group_attachment" "test" {
   count = "${var.environment == "Production" ? 3 : 3}"
   target_group_arn = aws_lb_target_group.test.arn
   target_id        = "${element(var.private_servers, count.index)}"
